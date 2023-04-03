@@ -1,0 +1,105 @@
+
+<ng-container *ngIf="itemsQuantity!==0">
+
+
+
+
+  <div class="cart-icon fixed top-36 right-7 z-20 animate-bounce flex justify-center items-center">
+
+        <button mat-icon-button class="" [matMenuTriggerFor]="menu">
+        <mat-icon [matBadge]="itemsQuantity" [matBadgeHidden]="!itemsQuantity" matBadgeColor="warn" class="text-white" >shopping_cart</mat-icon>
+
+        </button>
+
+
+
+        <mat-menu #menu="matMenu" >
+
+                    <div id="viweCart" class=" flex justify-center items-center">
+
+
+                <button  color="warn" class="m-2" mat-raised-button>{{'viwe Cart' | translate }}</button>
+
+                    </div>
+
+
+                <ng-container class="" *ngIf="(cart$|async)?.items?.length">
+
+                <div *ngFor="let item of (cart$|async)?.items" class="flex flex-col items-center">
+                <div>
+                    <span>  {{item.manufacturer}} x  </span> <span> {{item.quantity}}</span>
+
+                </div>
+
+                  <span class="font-bold  ">{{ item.price}} <span> lei </span></span>
+
+                </div>
+
+
+                <div class="flex flex-col items-center justify-between py-3 font-light ">
+
+<span class="font-bold text-xs p-1">Quantity of Porduses</span>
+                  <span class=" font-bold ">  {{itemsQuantity}}</span>
+
+             <span class="font-bold mt-1"> Total :</span>
+
+                  <span class="font-bold"> {{getTotalPrice(cart.items)  }} <span> lei </span> </span>
+
+
+              </div>
+
+              <div class="pt-3 flex justify-around">
+                  <button (click)="onClearCart()" class="bg-rose-600 text-wihte rounded-full w-9 h-9">
+                      <mat-icon>remove_shopping_cart</mat-icon>
+
+                  </button>
+
+
+                  <button (click)="toCart()"  class="bg-green-300 text-wihte rounded-full w-9 h-9">
+                      <mat-icon >shopping_cart</mat-icon>
+
+                  </button>
+
+              </div>
+                </ng-container>
+
+
+        </mat-menu>
+
+
+
+  </div>
+
+
+</ng-container>
+
+
+<p class=" text-4xl text-center text-white font-sans  mb-5">{{'ourProducts.Our Products' |translate}}</p>
+
+<swiper  [config]="swiperConfig" [slidesPerView]="3" [spaceBetween]="20" [navigation]="true"
+ [scrollbar]="{ draggable: true }" class="w-11/12 h-[600px] bg-black " effect="cube" [pagination]="{ clickable: true }">
+
+  <ng-template swiperSlide *ngFor="let obj of (this.products$|async)?.products"  class="flex flex-col items-center justify-center  mt-5 ">
+
+
+
+  <span class="text-2xl font-serif m-2 text-white">{{obj.manufacturer}}</span>
+  <p class="text-2xl font-serif m-2 text-white">{{ obj.price  }} <span> lei </span>
+  </p>
+      <img src="{{obj.image}}" class="h-80 w-9/12 rounded">
+
+
+
+      <button  class="m-4 animate-pulse"   mat-raised-button    color="warn"  (click)="addToCart(obj)"    >{{'ourProducts.Add to cart'|translate}}</button>
+
+
+
+
+
+
+
+  </ng-template>
+
+ </swiper>
+
+

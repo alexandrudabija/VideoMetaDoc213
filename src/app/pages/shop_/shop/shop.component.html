@@ -1,0 +1,42 @@
+<hr>
+<div class="w-full h-0.5 mt-24"> </div>
+
+<app-about-the-cart  class="w-full flex items-center justify-between h-10 mt-2 bg-white/30"></app-about-the-cart>
+
+<div
+  class="min-h-screen w-full mx-auto border-x flex justify-center items-start max-[700px]:flex-col"
+>
+  <div class="p-4 w-4/12 max-[700px]:w-full">
+    <app-filters (showManufacturer)="onShowManufacturer($event)"
+    (showCategory)="onShowCategory($event)"
+     (priceRange)="onPriceRangeChange($event)"
+     (reset)="onReset()"
+     ></app-filters>
+  </div>
+
+  <div class="p-4  w-full ">
+    <app-products-header class="w-full"
+      (columsCountChange)="onColumsCountChange($event)"
+        (itemsCountChange)="onItemsCountChange($event)"
+
+            (sortChange)="onSortCountChange($event)"
+    ></app-products-header>
+
+
+<div  class=" w-full flex flex-wrap min-[800px]:justify-start  justify-center" [ngClass]="{'min-[1039px]:grid min-[1039px]:grid-cols-3  justify-center':cols===3}">
+
+<app-product-box
+(addToCart)="addToCart($event)"
+*ngFor="let product of products"
+class=" p-2 m-2" [ngClass]="{'w-full': cols===1}" [fullWidthMode]="cols===1" [product]="product"></app-product-box>
+
+
+</div>
+
+
+
+  </div>
+</div>
+
+<div class="bg-orange-600 w-full h-0.5"> </div>
+

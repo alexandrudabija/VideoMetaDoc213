@@ -1,0 +1,18 @@
+<swiper [config]="config" [slidesPerView]="3" [spaceBetween]="20" [navigation]="true" [scrollbar]="{ draggable: true }"
+  class="w-11/12 h-[360px] bg-black max-[1381px]:my-10  mb-16">
+  <!-- [pagination]="{ clickable: true }" -->
+  <ng-template swiperSlide *ngFor="let obj of slides" class="flex flex-col items-center justify-center  mt-5 ">
+
+
+    <img src="{{obj.img}}" class="h-80 w-9/12 rounded max-[1381px]:h-40 max-[1381px]:w-6/12">
+
+
+
+
+
+
+
+
+  </ng-template>
+
+</swiper>

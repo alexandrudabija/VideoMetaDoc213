@@ -1,0 +1,40 @@
+
+<div class="first min-h-screen bg-black flex items-center  flex-col">
+
+
+<div class="mt-24 element">
+
+      <div class="description w-full flex flex-col items-center justify-center ">
+      <p class=" text-4xl text-center text-white font-sans">{{'OurServices.Our Services'|translate}}</p>
+
+
+      <p class=" w-10/12  text-center max-[459px]:text-base text-white text-xl font-sans">
+
+
+        {{ 'OurServices.' + ourServices|translate}}
+      </p>
+
+
+    </div>
+
+    <div class=" last w-full flex flex-wrap justify-center items-center  ">
+
+
+      <div *ngFor="let item of arraySolutions" class="  w-[330px] h-[350px]  m-4 flex flex-col items-center">
+
+        <span class="text-white text-lg m-2 element"> {{ 'OurServices.' + item.name |translate}}</span>
+
+
+        <img src="{{item.img}}" class="w-[296px] h-[296px] element rounded-md" alt="">
+
+
+      </div>
+
+    </div>
+
+</div>
+
+
+<app-test2 class="w-full mt-10 flex justify-center items-center  h-auto"></app-test2>
+
+</div>

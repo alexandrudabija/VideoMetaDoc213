@@ -1,0 +1,235 @@
+<!-- Content to display for large screens -->
+
+<div class="w-full text-white   min-[1000px]:flex  justify-evenly items-center bg-black/20">
+  <ng-container *ngIf="!isSmallScreen">
+    <div class="flex justify-evenly items-center w-full flex-wrap text-lg">
+      <div
+        class="brandTitle text-4xl h-20 flex justify-center items-center m-2"
+      >
+        <a href="/index">
+          <span class="animate-pulse font-bold"
+            >Video<span class="text-orange-600">MetaDoc</span></span
+          ></a
+        >
+      </div>
+
+      <div class="w-auto h-20 flex justify-center items-center m-2">
+        <button
+          class="ease-in-out my-button  hover:bg-orange-600 hover:text-black duration-300 hover:p-3 "
+          routerLink="/index"
+          (click)="navToRoute('index')"
+          routerLinkActive="active"
+
+        >
+         <!-- mat-underline  mat-button-->
+
+          {{ "navBar.Home" | translate }}
+        </button>
+      </div>
+
+      <div class="w-auto h-20 flex justify-center items-center m-2">
+        <button
+          class="ease-in-out hover:bg-orange-600 hover:text-black duration-300 hover:p-3"
+          routerLink="/services"
+          routerLinkActive="active"
+          (click)="navToRoute('services')"
+        >
+          {{ "navBar.Our Services" | translate }}
+        </button>
+      </div>
+
+      <div class="w-auto h-20 flex justify-center items-center m-2">
+        <button
+          class="ease-in-out hover:bg-orange-600 hover:text-black duration-300 hover:p-3"
+          routerLink="/category"
+          routerLinkActive="active"
+          (click)="navToRoute('category')"
+        >
+          <div class="p-0 m-0" routerLinkActive="active" routerLink="/shop">
+            <div class="p-0 m-0" routerLinkActive="active" routerLink="/cart">
+              {{ "navBar.Our Products" | translate }}
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <div class="w-auto h-20 flex justify-center items-center m-2">
+        <button
+          class="ease-in-out hover:bg-orange-600 hover:text-black duration-300 hover:p-3"
+          routerLink="/projects"
+          routerLinkActive="active"
+          (click)="navToRoute('projects')"
+        >
+          {{ "Projects" | translate }}
+        </button>
+      </div>
+
+      <div class="w-auto h-20 flex justify-center items-center m-2">
+        <button
+          class="ease-in-out hover:bg-orange-600 hover:text-black duration-300 hover:p-3"
+          routerLink="/about"
+          routerLinkActive="active"
+          (click)="navToRoute('about')"
+        >
+          {{ "navBar.About us" | translate }}
+        </button>
+      </div>
+
+      <div class="w-auto h-20 flex justify-center items-center m-2">
+        <button
+          class="ease-in-out hover:bg-orange-600 duration-300 hover:text-black hover:p-3"
+          routerLink="/contacts"
+          routerLinkActive="active"
+          (click)="navToRoute('contacts')"
+        >
+          {{ "navBar.Contacts" | translate }}
+        </button>
+      </div>
+
+      <div class="mb-2">
+        <div
+          class="custom-select capitalize text-center"
+          (click)="toggleOptions()"
+        >
+          <div class="selected-option">{{ selectedLanguage }}</div>
+          <div class="options-container" [ngClass]="{ hidden: !showOptions }">
+            <div
+              class="option"
+              *ngFor="let item of languageArray"
+              (click)="switchLanguage(item.language)"
+            >
+              {{ item.language === "zh" ? "Chi" : item.language }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--
+  <div class="w-auto h-20  flex justify-center items-center m-2">
+    <button class=" ease-in-out  hover:bg-orange-600	duration-300 hover:text-black	 hover:p-3 ">Inregistrare </button>
+  </div>
+
+  <div class="w-auto h-20  flex justify-center items-center m-2">
+
+    <button  class=" ease-in-out  hover:bg-orange-600		hover:text-black duration-300 hover:p-3 ">Autentificare </button>
+  </div>
+
+  <ng-container *ngIf="false" class="w-auto h-20  flex justify-center items-center m-2">
+    <button  class=" ease-in-out  hover:bg-orange-600	hover:text-black 	duration-300 hover:p-3 " >Iesire</button>
+  </ng-container> -->
+    </div>
+  </ng-container>
+
+  <!-- Content to display for small screens -->
+  <ng-container *ngIf="isSmallScreen">
+    <div class="flex justify-around items-center w-full absolute bg-black/20">
+      <div
+        class="brandTitle text-4xl max-[1000px]:text-3xl h-auto flex justify-center items-center m-1"
+      >
+        <a href="/index">
+          <span class="animate-pulse font-bold"
+            >Video<span class="text-orange-600">MetaDoc</span></span
+          ></a
+        >
+      </div>
+
+      <div class="navToggle" (click)="toggle()">
+        <span class="bar1"></span>
+        <span class="bar2"></span>
+        <span class="bar3"></span>
+      </div>
+    </div>
+
+    <div class="navBack">
+      <div class="ul">
+        <div class="bt mb-2">
+          <div
+            class="custom-select capitalize text-center"
+            (click)="toggleOptions()"
+          >
+            <div class="selected-option">{{ selectedLanguage }}</div>
+            <div class="options-container" [ngClass]="{ hidden: !showOptions }">
+              <div
+                class="option"
+                *ngFor="let item of languageArray"
+                (click)="switchLanguage(item.language)"
+              >
+                {{ item.language === "zh" ? "Chi" : item.language }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bt w-auto h-20 flex justify-center items-center m-2">
+          <button
+            class="ease-in-out hover:bg-orange-600 hover:text-black duration-300 hover:p-3"
+            (click)="navToRoute('index')"
+            routerLink="/index"
+            routerLinkActive="active"
+          >
+            {{ "navBar.Home" | translate }}
+          </button>
+        </div>
+
+        <div class="bt w-auto h-20 flex justify-center items-center m-2">
+          <button
+            class="ease-in-out hover:bg-orange-600 hover:text-black duration-300 hover:p-3"
+            routerLink="/services"
+            routerLinkActive="active"
+            (click)="navToRoute('services')"
+          >
+            {{ "navBar.Our Services" | translate }}
+          </button>
+        </div>
+
+        <div class="bt w-auto h-20 flex justify-center items-center m-2">
+          <button
+            class="ease-in-out hover:bg-orange-600 hover:text-black duration-300 hover:p-3"
+            routerLink="/category"
+            routerLinkActive="active"
+            (click)="navToRoute('category')"
+          >
+            <div class="p-0 m-0" routerLinkActive="active" routerLink="/shop">
+              <div class="p-0 m-0" routerLinkActive="active" routerLink="/cart">
+                {{ "navBar.Our Products" | translate }}
+              </div>
+            </div>
+          </button>
+        </div>
+
+        <div class="bt w-auto h-20 flex justify-center items-center m-2">
+          <button
+            class="ease-in-out hover:bg-orange-600 hover:text-black duration-300 hover:p-3"
+            routerLink="/projects"
+            routerLinkActive="active"
+            (click)="navToRoute('projects')"
+          >
+            {{ "Projects" | translate }}
+          </button>
+        </div>
+
+        <div class="bt w-auto h-20 flex justify-center items-center m-2">
+          <button
+            class="ease-in-out hover:bg-orange-600 hover:text-black duration-300 hover:p-3"
+            routerLink="/about"
+            routerLinkActive="active"
+            (click)="navToRoute('about')"
+          >
+            {{ "navBar.About us" | translate }}
+          </button>
+        </div>
+
+        <div class="bt w-auto h-20 flex justify-center items-center m-2">
+          <button
+            class="ease-in-out hover:bg-orange-600 duration-300 hover:text-black hover:p-3"
+            routerLink="/contacts"
+            routerLinkActive="active"
+            (click)="navToRoute('contacts')"
+          >
+            {{ "navBar.Contacts" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

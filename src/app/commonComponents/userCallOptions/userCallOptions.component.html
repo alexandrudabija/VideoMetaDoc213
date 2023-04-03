@@ -1,0 +1,41 @@
+<button id="call-btn" class="w-[130px] animate-pulse fixed flex items-center justify-center bottom-5 right-5 z-10 bg-orange-500 hover:bg-white hover:text-black
+ text-white font-bold py-2 px-4 rounded-lg shadow"
+ (click)="toggleCallOptions()">
+
+
+
+
+  <ng-container class="text-center  p-0 m-0" *ngIf="showCallOptions; else elseTemplate">
+    <mat-icon class="p-0 m-0">cancel</mat-icon>
+
+  </ng-container>
+  <ng-template #elseTemplate>
+    {{'call.Call now'|translate}}
+  </ng-template>
+
+
+</button>
+<ng-container *ngIf="showCallOptions">
+
+
+  <div  class=" call-options fixed bottom-16 right-9 z-30 bg-white rounded-lg shadow-md" [ngClass]="{'hidden': !showCallOptions}">
+    <a href="tel:+37368668297" class="p-4 hover:bg-gray-100 rounded-lg flex flex-col justify-center items-center"> {{'call.Call'|translate}}
+     <abbr title="068668297">  <mat-icon class="text-red-700  mt-2"> phone</mat-icon></abbr>
+
+    </a>
+    <a href="https://wa.me/c/37368668297" class=" p-4 hover:bg-gray-100 rounded-lg flex flex-col justify-center items-center">WhatsApp
+      <img src="./assets/images/footer/socialMedia/w.png" class="h-10 w-10 mt-2 " alt="">
+
+    </a>
+    <a href="viber://contact?number=%+37368668297" class=" p-4 hover:bg-gray-100 rounded-lg flex flex-col justify-center items-center">Viber
+      <img src="./assets/images/footer/socialMedia/v.png" class="h-10 w-1text-white  mt-2" alt="">
+
+    </a>
+    <a href="https://t.me/videometadoc" class=" p-4 hover:bg-gray-100 rounded-lg flex flex-col justify-around items-center">Telegram
+      <img src="./assets/images/footer/socialMedia/t.png" class="h-10 w-10  mt-2" alt="">
+
+    </a>
+  </div>
+
+</ng-container>
+

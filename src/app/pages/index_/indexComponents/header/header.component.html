@@ -1,0 +1,39 @@
+<!--
+
+<div class="mt-4 bg-center bg-contain  bg-no-repeat h-[600px] w-full   max-[608px]:h-[400px] max-[608px]:w-[400px] max-[408px]:h-[300px] max-[408px]:w-[260px]"
+ style="background-image: url('./assets/images/girl.jpg')">
+
+
+</div> -->
+
+
+<swiper [config]="config" class=" w-full bg-black ">
+  <ng-template swiperSlide *ngFor="let obj of arrayHeader   " class="flex justify-center ">
+
+
+    <img src="{{obj.img}}"
+      [ngClass]="{'bg-cover  bg-center w-full h-auto   ':
+     obj.img !=='./assets/images/indexImg/girl.jpg' , 'mt-16 w-10/12 h-auto  bg-cover bg-center':obj.img ==='./assets/images/indexImg/girl.jpg' }">
+
+
+    <p class=" text-3xl text-center  w-3/12 absolute max-[1732px]:text-2xl max-[1448px]:text-base max-[1448px]:w-3/12 max-[1519px]:w-3/12 max-[455px]:w-2/12
+  left-10 top-96  z-50  max-[1200px]:top-52  max-[490px]:left-3 max-[412px]:text-sm   max-[375px]:top-20 max-[329px]:text-xs max-[627px]:top-32
+   text-orange-600  font-semibold"
+
+   >
+   <span *ngIf="obj.img !=='./assets/images/indexImg/index.jpg'" >{{hiddenWord}}</span>
+    </p>
+
+
+
+    <span class=" text-3xl  absolute text-center max-[1732px]:text-2xl  max-[1448px]:text-base max-[1519px]:w-4/12  max-[1200px]:top-52  max-[627px]:top-32
+       max-[455px]:w-3/12
+    max-[1448px]:w-4/12 max-[490px]:right-3.5  max-[412px]:text-sm  max-[375px]:top-24 max-[329px]:text-xs
+  right-7 top-96  z-50 w-5/12
+   text-orange-600  font-semibold">
+      {{obj.title2}}</span>
+
+  </ng-template>
+  <div class="bg-white w-full h-0.5"> </div>
+
+</swiper>

@@ -1,0 +1,38 @@
+
+<p class="text-center font-sans text-3xl mb-2 text-white w-full ">{{'statistic.Obtained results' | translate}}</p>
+<div class="flex flex-wrap  justify-around   rounded"  >
+
+  <div *ngFor="let item of statisticsArray" class="w-[360px]  flex justify-between items-center m-2" >
+
+
+    <div class="flex justify-evenly w-full h-full font-serif  text-xl">
+            <img src="{{item.img}}" alt="" class="w-[90px] h-[90x]">
+
+
+        <div class="flex flex-col justify-around items-start w-6/12 ">
+
+    <span class="text-orange-800 text-center w-full">
+  <span class=""  #countUpSpan
+          [countUp]="item.value"
+          [options]="{ duration: 140 }"
+
+        >{{item.value }}
+
+    </span> {{ item.percentage ==true ? '%' :''}}
+
+
+    </span>
+
+
+
+
+            <span class="text-white text-center w-full">{{  'statistic.' + item.name | translate }}</span>
+
+        </div>
+    </div>
+
+
+  </div>
+
+
+</div>

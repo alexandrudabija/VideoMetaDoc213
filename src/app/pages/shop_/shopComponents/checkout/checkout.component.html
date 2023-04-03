@@ -1,0 +1,144 @@
+
+<ng-container *ngIf="this.payment===false; else elseTemplate" >
+
+
+
+
+  <div    class="flex w-full min-h-screen justify-items-center items-center  max-[820px]:flex-col ">
+
+
+
+    <div class=" w-full max-[820px]:mt-10 ">
+
+      <div id="scrollbar"   class="h-[400px] flex items-end justify-items-center flex-col   p-10 w-full   ">
+
+        <div id="start" #scrollContainer class="w-8/12 max-[820px]:w-full  flex items-start justify-items-center flex-col">
+          <button class="mt-4 mb-4" mat-raised-button (click)="back()"> Back To Cart </button>
+          <span class="font-semibold font-sans mb-2 mt-2 text-lg text-orange-700"  >VideoMetaDoc</span>
+          <h1 class="font-bold "> {{this.CartService.getTotalPrice(this.cartCheckout.items) }} <span> lei </span></h1>
+        </div>
+        <div class=" w-8/12  max-[820px]:w-full  mt-2 mb-2 flex items-center justify-between"
+          *ngFor="let item of cartCheckout.items ">
+
+          <div class="flex items-center">
+            <img src="{{item.image}}" class="h-16 w-16 rounded">
+            <div class="m-2 flex flex-col">
+              <small class="font-bold">{{item.manufacturer}}</small>
+              <small class="text-muted">Qty.{{item.quantity}}</small>
+            </div>
+
+          </div>
+
+          <div class="flex  justify-items-end items-end flex-col">
+            <small class="font-bold" *ngIf="item.quantity>1">Total
+              {{item.quantity*item.price}} <span> lei </span></small>
+
+            <small class="text-muted">{{item.price }} <span> lei  </span> </small>
+          </div>
+
+        </div>
+        <hr class="rounded  w-8/12 max-[820px]:w-full  bg-slate-300">
+
+
+
+        <hr class="rounded w-8/12  bg-slate-300">
+        <div class="w-8/12   flex justify-between ">
+          <span class="font-bold ">Total</span>
+          <span class="font-bold "> {{this.CartService.getTotalPrice(this.cartCheckout.items)}} <span> lei </span></span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class=" w-full h-auto flex items-center justify-center">
+
+      <form [formGroup]="OrderForm" (ngSubmit)="createOrder()"
+        class=" w-6/12 max-[820px]:w-11/12  p-2 flex items-center flex-col max-[792px]:flex-col h-auto ">
+        <label class="font-bold w-full mb-4"> Order Details
+        </label>
+
+        <!-- User -->
+        <div [formGroupName]="'user'" class=" w-full flex items-center flex-col max-[792px]:flex-col ">
+          <label class="w-full font-medium" for="email">E-mail</label>
+
+          <input [formControlName]="'email'" class="bg-white  px-3 py-2 border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block  rounded-md sm:text-sm focus:ring-1 w-full" type="email">
+ <span  class="text-red-600" *ngIf="!isMailInvalid?.valid && isMailInvalid?.touched">Email is wrong</span>
+          <label class="mt-4 w-full font-sans  font-medium"> Personal Data </label>
+
+          <input [formControlName]="'firstname'" class="bg-white px-3 py-2 border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block  rounded-md sm:text-sm focus:ring-1 w-full mt-2" type="text"
+            placeholder="Firstname">
+<span class="text-red-600" *ngIf="!isFirstnameInvalid?.valid && isFirstnameInvalid?.touched">minimum 2 characters
+</span>
+
+          <input [formControlName]="'lastname'" class="bg-white px-3 py-2 border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block  rounded-md sm:text-sm focus:ring-1  w-full mt-2" type="text"
+            placeholder="Lastname">
+<span class="text-red-600" *ngIf="!isLastnameInvalid?.valid && isLastnameInvalid?.touched">minimum 2 characters
+</span>
+
+              <input [formControlName]="'phone'"
+                class="bg-white px-3 py-2 border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block  rounded-md sm:text-sm focus:ring-1 w-full mt-2"
+                type="text" placeholder="Phone">
+<span class="text-red-600" *ngIf="!isPhoneInvalid?.valid && isPhoneInvalid?.touched">Phone is wrong</span>
+
+
+ <!-- Delivery address -->
+        </div>
+          <div class="w-full flex justify-start">
+          <mat-chip-option (click)="toggleShipping()" class="mt-2 bt-2" color="warn">Wiht Shipping</mat-chip-option>
+
+          </div>
+         <ng-container *ngIf="Shipping">
+<span class="text-center font-serif text-lg m-2 text-red-700">The delivery can be have additional cost</span>
+
+        <div [formGroupName]="'address'" class="w-full  flex items-center flex-col max-[792px]:flex-col ">
+
+
+          <input [formControlName]="'city'" class="bg-white px-3 py-2 border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block  rounded-md sm:text-sm focus:ring-1 w-full mt-2" type="text"
+            placeholder="Country">
+          <input [formControlName]="'street'" class="bg-white px-3 py-2 border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block  rounded-md sm:text-sm focus:ring-1  w-full mt-2" type="text"
+            placeholder="Street">
+
+          <div class="flex justify-items-center  w-full">
+
+            <input [formControlName]="'zipcode'" class="bg-white w-6/12   border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block  rounded-md sm:text-sm focus:ring-1  px-3 py-2  mt-2" type="text" placeholder="Zip code">
+            <input [formControlName]="'city'" class="bg-white  w-6/12  px-3 py-2 border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block  rounded-md sm:text-sm focus:ring-1   mt-2" type="text" placeholder="City">
+
+          </div>
+        </div>
+        </ng-container>
+
+        <br>
+
+
+
+
+
+  <button mat-flat-button color="primary" type="submit" class="max-[600px]:w-[185px] w-6/12  mt-4 "
+   [disabled]="userInvalid" >Submit order</button>
+
+
+
+      </form>
+<!--  -->
+
+    </div>
+
+  </div>
+<div class="bg-orange-600 w-full h-0.5"> </div>
+
+  </ng-container>
+
+
+  <ng-template  #elseTemplate>
+  <div class="absolute h-full w-full  bg-neutral-100  flex items-center justify-center flex-col 	">
+
+
+    <span class="text-center text-lg text-orange-500 " >You Have Successfully Made the  order ! Number order : {{orderId }} </span>
+    <span class="text-center text-2xl text-orange-500 m-2">In the near future you will be contacted by an operator for details</span>
+    <button class="mt-4 mb-4 animate-bounce" mat-raised-button (click)="toShop()"> Back To VideoMetaDoc </button>
+  </div>
+
+  </ng-template>
+

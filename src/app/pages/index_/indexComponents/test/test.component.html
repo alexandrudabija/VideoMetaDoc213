@@ -1,0 +1,157 @@
+<div
+  *ngIf="!testShow; else test"
+  class="h-[410px] w-full  max-[608px]:w-[400px] max-[491px]:w-[300px]"
+
+>
+  <div class="flex justify-center items-center flex-col w-5/12 m-14">
+    <p
+      class="max-[627px]:text-2xl text-3xl font-serif font-semibold text-center text-orange-600"
+    >
+      {{'test.Know the cost of a video surveillance system for YOUR Property.' |translate}}
+    </p>
+
+    <button
+      (click)="testInit()"
+      mat-raised-button
+      color="warn"
+      class="mt-14 animate-bounce duration-300"
+      style="padding: 30px"
+    >
+     {{'test.Know the cost'|translate}}
+    </button>
+  </div>
+</div>
+
+<ng-template #test>
+  <form
+    [formGroup]="testQuestions"
+    class=" h-[410px] w-full max-[608px]:w-[400px] max-[491px]:w-[300px]  font-mono flex justify-center  items-center flex-col"
+
+  >
+
+    <mat-progress-bar
+class="m-2"
+      mode="determinate"
+      value="{{ currentQuestionIndex  * 25 }}"
+    ></mat-progress-bar>
+
+    <div class=" w-full flex justify-center items-center flex-col">
+
+     <div class="question-currentQuestion text-center">
+
+      <label
+        class="text-3xl inline-block max-[627px]:text-2xl"
+        *ngIf="currentQuestionIndex < questionsArray.length"
+        >{{ this.questionsArray[this.currentQuestionIndex].question }}
+      </label>
+      <span class="font-serif m-5 text-3xl text-red-600 animate-pulse	" >
+        {{ this.currentQuestionIndex }}/{{ questionsArray.length + 1 }}</span
+      >
+
+
+    </div>
+
+
+    <mat-radio-group
+      *ngIf="currentQuestionIndex < questionsArray.length"
+      formControlName="answer"
+      class="text-2xl mt-3  ml-16 text-center flex flex-col items-start justify-center "
+    >
+      <mat-radio-button
+        *ngFor="let obj of this.questionsArray[currentQuestionIndex].answers"
+        [value]="obj.answer"
+        checked="{{ checked[currentQuestionIndex] == obj.answer }}"
+      >
+       <span class="font-serif"> {{ obj.answer }}</span>
+      </mat-radio-button>
+    </mat-radio-group>
+
+
+
+
+    </div>
+
+
+    <ng-container
+      *ngIf="currentQuestionIndex === questionsArray.length"
+      formGroupName="personalData"
+      class="flex justify-center items-center p-14 m-10"
+    >
+      <label for="name" class="font-serif text-3xl max-[627px]:text-2xl text-center  "
+        >
+       {{'test.Enter your contact details to receive the price'|translate}}
+      </label>
+
+      <input
+        class="mt-4 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-4/12 rounded-md sm:text-sm focus:ring-1 text-center"
+        type="text"
+        formControlName="name"
+        placeholder="{{'test.Name' |translate}}"
+        maxlength="30"
+      />
+ <span *ngIf="!isNameInvalid?.valid && isNameInvalid?.touched" class="text-red-700 font-sans text-center">minimum 2 characters</span>
+      <input
+        class="mt-4 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-4/12 rounded-md sm:text-sm focus:ring-1 text-center"
+        type="text"
+        formControlName="location"
+        placeholder="{{'test.Location' |translate}}"
+        maxlength="14"
+      />
+<span *ngIf="!isLocationInvalid?.valid && isLocationInvalid?.touched" class="text-red-700 font-sans text-center">minimum 2
+  characters</span>
+
+      <input
+        class="mt-4 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-4/12 rounded-md sm:text-sm focus:ring-1 text-center"
+        type="text"
+        formControlName="phone"
+        placeholder="{{'test.Phone' |translate}}"
+        maxlength="14"
+        />
+        <span *ngIf="!isPhoneInvalid?.valid && isPhoneInvalid?.touched" class="text-red-700 font-sans text-center">Phone is wrong</span>
+
+    </ng-container>
+
+    <ng-container  *ngIf="currentQuestionIndex > questionsArray.length">
+      <span class=" text-center h-[300px] max-[627px]:text-base  text-2xl flex items-center">
+       <span>{{'test.You have successfully completed the test, a consultant will contact you shortly'|translate}}</span>
+      </span>
+    </ng-container>
+
+    <div class="butons w-full flex justify-around">
+      <button
+        *ngIf="currentQuestionIndex <= questionsArray.length"
+        mat-raised-button
+        color="primary"
+        [disabled]="currentQuestionIndex === 0"
+        type="button"
+        (click)="onBack()"
+        class="m-5"
+      >
+        {{'test.Back'|translate}}
+      </button>
+
+      <button
+        *ngIf="currentQuestionIndex < questionsArray.length"
+        mat-raised-button
+        color="warn"
+        [disabled]="!isAnswerValid"
+        (click)="onNext()"
+        class="m-5"
+      >
+        {{'test.Next'|translate}}
+      </button>
+
+      <button
+        *ngIf="currentQuestionIndex === questionsArray.length"
+        mat-raised-button
+        color="warn"
+        [disabled]="!testQuestions.valid"
+        type="submit"
+        (click)="finishTest()"
+        class="m-5 animate-bounce duration-300 max-[323px]:text-xs max-[323px]:w-32"
+      >
+       {{ 'test.Know the Cost'| translate}}
+      </button>
+    </div>
+  </form>
+</ng-template>

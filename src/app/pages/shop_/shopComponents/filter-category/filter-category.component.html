@@ -1,0 +1,39 @@
+
+<div class="bg-black ">
+
+<hr>
+
+<div class="mt-14 ">
+  <!-- <div >
+  <p class="text-center bg-black text-white font-bold  mt-60 font-serif p-5 text-3xl">Select Categories </p>
+</div> -->
+
+
+  <div class="min-h-screen flex flex-wrap justify-center items-center  ">
+
+
+    <div *ngFor="let item of ( categories$ | async)?.cat" (click)="onCategory(item.title)"
+      style=" height: 200px; width: 250px;" class="m-10 element drop ">
+
+      <button style="height: 200px; width: 250px; background-image: url({{item.image}});
+    background-position: center; background-size:cover; display: flex ; align-items: end;" mat-stroked-button>
+
+
+
+
+      </button>
+
+      <button style="width: 100%;"
+        class="text-white p-2 bg-black/30  font-serif text-lg text-center">{{item.title}}</button>
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+</div>

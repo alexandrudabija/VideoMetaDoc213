@@ -1,0 +1,47 @@
+
+
+
+<button id="call-btn" class="w-[135px]  max-[370px]:w-[98px] max-[370px]:bottom-3  animate-pulse fixed bottom-5 flex items-center justify-center left-2   z-10 text-center  bg-white  hover:text-white hover:bg-orange-500
+  text-black  font-bold py-2 px-4 rounded-md shadow "
+ (click)="toggleRequestCall()" >
+
+
+<ng-container class="text-center  p-0 m-0" *ngIf="showRequestCall; else elseTemplate">
+  <mat-icon class="p-0 m-0">cancel</mat-icon>
+
+</ng-container>
+<ng-template #elseTemplate>
+ {{'call.Request a Call' |translate}}
+</ng-template>
+
+</button>
+
+<ng-container *ngIf="showRequestCall">
+      <form id="call-options" [formGroup]="formCall"
+      class="w-[135px]  max-[370px]:w-[104px] fixed bottom-16 max-[370px]:bottom-14 left-2 flex p-2 z-10  flex-col justify-center items-center bg-white rounded-lg shadow-md" [ngClass]="{'hidden': !showRequestCall}">
+        <input
+        class="mt-4 px-3 py-2 w-full  bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block  rounded-md sm:text-sm focus:ring-1 text-center"
+        type="text"
+        placeholder="{{'call.Name' |translate}}"
+        maxlength="30"
+        formControlName="name"
+      />
+<span class="text-red-600" *ngIf="!getNameValid?.valid && getNameValid?.touched">Email is wrong</span>
+
+        <input
+        class="mt-4 px-3 py-2 w-full  bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block  rounded-md sm:text-sm focus:ring-1 text-center"
+        type="text"
+        placeholder="{{'call.Phone' |translate}}"
+        maxlength="30"
+          formControlName="phone"
+      />
+<span class="text-red-600" *ngIf="!getPhoneValid?.valid && getPhoneValid?.touched">Phone is wrong</span>
+
+
+      <button mat-raised-button color="warn" [disabled]="!formCall.valid" (click)="onRequestCall()" class="p-2 mt-4 "> {{'call.Request a Call' |translate}}</button>
+
+
+      </form>
+
+</ng-container>
+

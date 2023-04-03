@@ -1,0 +1,81 @@
+<div class="w-10/12" style="background-image: url('./assets/images/test/test.jpg');
+    background-position:center; background-size:cover;">
+
+<ng-container [ngSwitch]="stepperOrientation | async">
+  <div  class="text-center text-orange-600  text-xl p-2 capitalize h-5" *ngSwitchCase="'horizontal'">
+
+
+<span> {{ hiddenWord }}<span *ngIf="showCursor">{{ cursor }}</span>
+
+  </span>
+
+  </div>
+
+  
+  <div class="text-center text-orange-600 text-xl p-2 capitalize h-5" *ngSwitchCase="'vertical'">
+    <span> {{ hiddenWord }}<span *ngIf="showCursor">{{ cursor }}</span>
+
+    </span>
+
+
+</div>
+</ng-container>
+
+    <mat-stepper
+    class="min-[800px]:h-[386px] bg-transparent"
+
+ [orientation]="(stepperOrientation | async)!">
+
+
+
+
+      <mat-step [stepControl]="firstFormGroup"   label="Fill out your name" errorMessage="Name is required.">
+        <form [formGroup]="firstFormGroup">
+          <mat-form-field appearance="fill">
+
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Last name, First name"  style="width: max-content;" formControlName="firstCtrl" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext color="warn">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup" label="Enter your question"  errorMessage="Question is required.">
+
+        <form [formGroup]="secondFormGroup">
+          <mat-form-field appearance="fill">
+            <mat-label>Question</mat-label>
+            <input matInput formControlName="secondCtrl" placeholder=" Ex. cost of 2 cameras Hikvinsion ?" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious color="primary">Back</button>
+            <button mat-button matStepperNext color="warn">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="thirdFormGroup" label="Fill out your phone number" errorMessage="Number is required.">
+        <form [formGroup]="thirdFormGroup">
+          <mat-form-field appearance="fill">
+            <mat-label>Phone number</mat-label>
+            <input matInput formControlName="thirdCtrl" placeholder="Ex. 12345678" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious color="primary">Back</button>
+            <button mat-button matStepperNext color="warn">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel color="warn">Done</ng-template>
+        <p>You are now done.</p>
+        <div>
+          <button mat-button matStepperPrevious color="primary">Back</button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+
+
+</div>
+
+
